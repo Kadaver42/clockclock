@@ -16,10 +16,10 @@ void setup() {
   Wire.begin();
 
   // Initialize the RTC on A4 and A5
-  rtc.begin();
+  rtc.begin(0x68);
 
   // Initialize the PCA9685 on A4 and A5 with address 0x41
-  pwm.begin(0x41);
+  pwm.begin(0x40);
   // Set the PWM frequency to 50 Hz
   pwm.setPWMFreq(50);
 }
@@ -54,3 +54,4 @@ void loop() {
  pwm.setPWM(SERVO_CHANNEL2, 0, MAX_PULSE_WIDTH);
  delay(1000);
 }
+             
