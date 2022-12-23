@@ -1,3 +1,4 @@
+
 #include <Wire.h>
 #include <RTClib.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -13,13 +14,15 @@ const int MAX_PULSE_WIDTH = 550;
 
 void setup() {
   // Initialize the I2C bus on A4 and A5
+  Serial.begin(9600);
   Wire.begin();
 
   // Initialize the RTC on A4 and A5
-  rtc.begin(0x68);
-
+  
   // Initialize the PCA9685 on A4 and A5 with address 0x41
   pwm.begin(0x40);
+  rtc.begin(0x68);
+
   // Set the PWM frequency to 50 Hz
   pwm.setPWMFreq(50);
 }
