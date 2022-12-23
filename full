@@ -1,3 +1,4 @@
+
 #include <Wire.h>
 #include <RTClib.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -46,14 +47,16 @@ void loop() {
  Serial.println();
  
  // Wait for one second before reading the time and date again
- delay(500);
- // Set the pulse width to the minimum value
- pwm.setPWM(SERVO_CHANNEL, 0, MIN_PULSE_WIDTH*2);
- pwm.setPWM(SERVO_CHANNEL2, 0, MIN_PULSE_WIDTH*2);
  delay(1000);
+ // Set the pulse width to the minimum value
+ pwm.setPWM(SERVO_CHANNEL, 0, (100+7*(now.second())));
+ //delay(500);
+ pwm.setPWM(SERVO_CHANNEL2, 0, (100+7*(now.second())));
+ //delay(500);
  
  // Set the pulse width to the maximum value
- pwm.setPWM(SERVO_CHANNEL, 0, MAX_PULSE_WIDTH/2);
- pwm.setPWM(SERVO_CHANNEL2, 0, MAX_PULSE_WIDTH/2);
- delay(1000);
+ //pwm.setPWM(SERVO_CHANNEL, 0, 400);
+ //delay(500);
+ //pwm.setPWM(SERVO_CHANNEL2, 0, 400);
 }
+      
