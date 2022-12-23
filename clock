@@ -1,0 +1,38 @@
+#include <Wire.h>
+#include <RTClib.h>
+ 
+RTC_PCF8523 rtc;
+ 
+void setup() {
+ // Initialize the I2C communication
+ Wire.begin();
+ Serial.begin(9600);
+ // Initialize the RTC
+ rtc.begin();
+ 
+ // Set the current time and date on the RTC
+ 
+}
+ 
+void loop() {
+ // Read the time and date from the RTC
+ DateTime now = rtc.now();
+ 
+ // Print the time and date to the serial monitor
+ Serial.print(now.year(), DEC);
+ Serial.print('/');
+ Serial.print(now.month(), DEC);
+ Serial.print('/');
+ Serial.print(now.day(), DEC);
+ Serial.print(" ");
+ Serial.print(now.hour(), DEC);
+ Serial.print(':');
+ Serial.print(now.minute(), DEC);
+ Serial.print(':');
+ Serial.print(now.second(), DEC);
+ Serial.println();
+ 
+ // Wait for one second before reading the time and date again
+ delay(1000);
+}
+ 
