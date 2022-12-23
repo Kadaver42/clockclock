@@ -1,10 +1,9 @@
-
 #include <Wire.h>
 #include <RTClib.h>
 #include <Adafruit_PWMServoDriver.h>
 
 RTC_PCF8523 rtc;
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);
 
 const int SERVO_CHANNEL = 1;
 const int SERVO_CHANNEL2 = 4;
@@ -20,8 +19,8 @@ void setup() {
   // Initialize the RTC on A4 and A5
   
   // Initialize the PCA9685 on A4 and A5 with address 0x41
-  pwm.begin(0x40);
-  rtc.begin(0x68);
+  pwm.begin();
+  rtc.begin();
 
   // Set the PWM frequency to 50 Hz
   pwm.setPWMFreq(50);
@@ -29,6 +28,7 @@ void setup() {
  
 void loop() {
  // Read the time and date from the RTC
+ 
  DateTime now = rtc.now();
  
  // Print the time and date to the serial monitor
@@ -48,13 +48,12 @@ void loop() {
  // Wait for one second before reading the time and date again
  delay(500);
  // Set the pulse width to the minimum value
- pwm.setPWM(SERVO_CHANNEL, 0, MIN_PULSE_WIDTH);
- pwm.setPWM(SERVO_CHANNEL2, 0, MIN_PULSE_WIDTH);
+ pwm.setPWM(SERVO_CHANNEL, 0, MIN_PULSE_WIDTH*2);
+ pwm.setPWM(SERVO_CHANNEL2, 0, MIN_PULSE_WIDTH*2);
  delay(1000);
  
  // Set the pulse width to the maximum value
- pwm.setPWM(SERVO_CHANNEL, 0, MAX_PULSE_WIDTH);
- pwm.setPWM(SERVO_CHANNEL2, 0, MAX_PULSE_WIDTH);
+ pwm.setPWM(SERVO_CHANNEL, 0, MAX_PULSE_WIDTH/2);
+ pwm.setPWM(SERVO_CHANNEL2, 0, MAX_PULSE_WIDTH/2);
  delay(1000);
 }
-             
